@@ -1,0 +1,10 @@
+import { db } from "../config/db.js";
+
+export const getPaymentMethod = async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM paymentmethods where active_status = 1");
+    res.json({data : rows});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
